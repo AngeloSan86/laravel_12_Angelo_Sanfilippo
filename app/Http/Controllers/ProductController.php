@@ -15,9 +15,16 @@ class ProductController extends Controller
 
         $product = new Product();
 
-        $product->name = $name;
-        $product->description = $description;
-        $product->price = $price;
+        //$product->name = $name;
+        //$product->description = $description;
+        //$product->price = $price;
+
+
+        $product = Product::create([
+            'name' => $name,
+            'description' => $description,
+            'price' => $price,
+        ]);
 
         $product->save();
 

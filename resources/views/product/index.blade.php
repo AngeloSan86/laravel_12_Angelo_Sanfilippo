@@ -12,15 +12,8 @@
     <div class="container">
         <div class="row">
             @foreach($products as $product)
-                <div class="col-12 col-md-4 mb-4"> <!-- Colonna per 3 card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title text-center mb-2">{{ $product->name }}</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary text-center mb-3">{{ $product->price }} €</h6>
-                            <p class="card-text">{{ $product->description }}</p>
-
-                        </div>
-                    </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <x-card :product="$product" />
                 </div>
             @endforeach
         </div>

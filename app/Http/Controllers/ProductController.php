@@ -27,18 +27,9 @@ class ProductController extends Controller
 
         if ($request->file('img')) {
 
-            $img = $request->file('img')->store('public/img');
+            $img = $request->file('img')->store('img', 'public');
 
         }
-
-
-        
-
-        $product = new Product();
-
-        //$product->name = $name;
-        //$product->description = $description;
-        //$product->price = $price;
 
 
         $product = Product::create([
@@ -48,7 +39,6 @@ class ProductController extends Controller
             'img' => $img
         ]);
 
-        $product->save();
 
         return redirect()->back()->with('message', 'Prodotto creato!');
 

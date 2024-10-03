@@ -7,7 +7,8 @@
 
                     <h1 class="text-center mt-5">
 
-                        P.S. NON CAPISCO PERCHE' NON RIESCO A FAR VISUALIZZARE LE IMMAGINI NE "I MIEI PRODOTTI".   :'-( 
+                        Homepage!
+
                     </h1>
 
 

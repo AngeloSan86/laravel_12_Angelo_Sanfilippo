@@ -8,7 +8,6 @@ use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
-
     public function create(){
 
         return view('product.create');

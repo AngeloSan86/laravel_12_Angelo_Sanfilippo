@@ -17,10 +17,6 @@
         </div>
     </header>
 
-
- 
-
-
-
+    <x-display-message/>
 
 </x-layout>

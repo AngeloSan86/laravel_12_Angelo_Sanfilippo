@@ -12,10 +12,35 @@
         <li class="nav-item">
           <a class="nav-link" href="{{route('products.index')}}">I miei prodotti</a>
         </li>
+
+        @auth
         <li class="nav-item">
-          <a class="nav-link" href="{{route('product.create')}}">Nuovo prodotto</a>
+          <a class="nav-link" href="{{route('product.create')}}">Crea prodotto</a>
         </li>
-      
+        @endauth
+
+        @guest
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('register')}}">Registrati</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('login')}}">Accedi</a>
+        </li>
+        @endguest
+   
+        @auth
+
+        <li class="nav-item">
+            <form action="{{route('logout')}}" method="POST">
+              @csrf
+              <button class="nav-link" type="submit">Logout</button>
+            </form>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link ms-5">Salve {{Auth::user()->name}}</a>
+        </li>
+        @endauth
       </ul>
       
     </div>

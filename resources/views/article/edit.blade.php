@@ -6,7 +6,7 @@
                 <div class="col-12 col-md-6 d-flex justify-content-center">
 
                     <h1 class="text-center mt-5">
-                        Modifica articolo SE AGGIORNO L'IMMAGINE, NON VIENE PIU VIUALIZZATA. ANCHE SE CREO UN NUOVO PRODOTTO NON VEDO L'IMMAGINE DI DEFAULT
+                        Modifica articolo
                     </h1>
 
 
@@ -20,10 +20,10 @@
     <x-display-errors/>
 
     <div class="container">
-        <div class="row mt-5 justify-content-center my-5">
+        <div class="row justify-content-center p-0">
             <div class="col-12 col-md-6 justify-content-center">
 
-                <form class="rounded-4 shadow bg-secondary-subtle p-3" action="{{route('article.update', compact('article'))}}" method="POST" enctype="multipart/form-data">
+                <form class="mt-5 rounded-top-4 shadow bg-secondary-subtle p-3" action="{{route('article.update', compact('article'))}}" method="POST" enctype="multipart/form-data">
 
 
                     @csrf
@@ -53,19 +53,27 @@
                     
      
 
-                    <button type="submit" class="btn btn-primary">Modifica articolo</button>
+                    <button type="submit" class="btn btn-primary mt-2">Modifica articolo</button>
 
-
-
-        
+                   
 
                 </form>
 
-                <form action="{{route('article.destroy', compact('article'))}}" method="POST">
+
+
+            </div>
+            
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center p-0">
+            <div class="col-12 col-md-6 justify-content-center">
+
+            <form class="rounded-bottom-4 mb-5 shadow bg-secondary-subtle p-3" action="{{route('article.destroy', compact('article'))}}" method="POST">
                     @csrf
                     @method('DELETE')
 
-                    <button type="submit" class="btn btn-primary ms-5">
+                    <button type="submit" class="btn btn-primary mb-1">
                                 
                         Elimina articolo
 
@@ -73,11 +81,6 @@
 
 
                 </form>
-
-
- 
-
-                
 
             </div>
             

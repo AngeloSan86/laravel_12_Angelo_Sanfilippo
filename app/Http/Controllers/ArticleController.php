@@ -60,8 +60,22 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $article->update($request->all());
+        // $article->update($request->all());
+
+        $article->update([
+            $article->title = $request->title,
+            $article->subtitle = $request->subtitle,
+            $article->body = $request->body
+        ]);
+        if($request->img){
+            $article->update([
+                $article->img = $request->file('img')->store('img', 'public')
+            ]);
+
+        }
+
         return redirect()->back()->with('message', 'Articolo aggiornato.');
+
     }
 
     /**

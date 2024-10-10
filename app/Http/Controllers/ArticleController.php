@@ -29,12 +29,17 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        Article::create([
+        $article = Article::create([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'body' => $request->body,
-            'img' => $request->file('img')->store('img', 'public'),
+            //'img' => $request->file('img')->store('img', 'public'),
         ]);
+
+        if($request->file('img')){
+            $article->img = $request->file('img')->store('public/img');
+            $article->save();
+        }
 
         return redirect()->back()->with('message', 'Articolo creato con successo.');
     }

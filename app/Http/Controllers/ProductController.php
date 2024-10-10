@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
@@ -35,7 +36,8 @@ class ProductController extends Controller
             'name' => $name,
             'description' => $description,
             'price' => $price,
-            'img' => $img
+            'img' => $img,
+            'user_id' => Auth::user()->id
         ]);
 
 

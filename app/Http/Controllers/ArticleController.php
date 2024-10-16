@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class ArticleController extends Controller
 {
@@ -20,8 +23,10 @@ class ArticleController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {       
-        return view('article.create');
+    {     
+        $tags = Tag::all();
+        
+        return view('article.create', compact('tags'));
     }
 
     /**
@@ -29,6 +34,8 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $article = Article::create([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
@@ -37,9 +44,11 @@ class ArticleController extends Controller
         ]);
 
         if($request->file('img')){
-            $article->img = $request->file('img')->store('public/img');
+            $article->img = $request->file('img')->store('img', 'public');
             $article->save();
         }
+
+        $article->tags()->attach($request->tags);
 
         return redirect()->back()->with('message', 'Articolo creato con successo.');
     }
@@ -57,7 +66,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('article.edit', compact('article'));
+        $tags = Tag::all();
+        return view('article.edit', compact('article', 'tags'));
     }
 
     /**
@@ -66,6 +76,11 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         // $article->update($request->all());
+
+        if($request->file('img')) {
+            Storage::delete($article->img);
+            $img = $request->file('img')->store('public/img');
+        }
 
         $article->update([
             $article->title = $request->title,
@@ -79,6 +94,8 @@ class ArticleController extends Controller
 
         }
 
+        $article->tags()->sync($request->tags);
+
         return redirect()->back()->with('message', 'Articolo aggiornato.');
 
     }
@@ -88,6 +105,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        $article->tags()->detach();
+
         $article->delete();
         return view('welcome')->with('message', 'Articolo eliminato con successo.');
     }

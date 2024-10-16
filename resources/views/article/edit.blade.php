@@ -1,19 +1,6 @@
 <x-layout>
 
-    <header class="header">
-        <div class="container h-100">
-            <div class="row justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-6 d-flex justify-content-center">
-
-                    <h1 class="text-center mt-5">
-                        Modifica articolo
-                    </h1>
-
-
-                </div>
-            </div>
-        </div>
-    </header>
+<x-masthead title="Modifica articolo"></x-masthead>
 
     <x-display-message/>
 
@@ -45,10 +32,25 @@
                     </div>
 
                     <div class="mb-3">
+                        @foreach($tags as $tag)
+                            <div class="form-check">
+                                <input class="form-check-input" name="tags[]" type="checkbox" value="{{$tag->id}}" id="flexCheckDefault" @if($article->tags->contains($tag)) checked @endif>
 
-                        <label for="img" class="form-label">Inserisci immagine</label>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{$tag->name}}
+                                </label>
+                            </div>
+                        @endforeach    
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="form-label">Immagine attuale:</span>
+                        <img src="{{Storage::url($article->img)}}" alt="{{$article->title}}" width="400" height="200">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="img" class="form-label">Inserisci nuova immagine</label>
                         <input name="img" type="file" class="form-control me-2" id="img">
-
                     </div>
                     
      
